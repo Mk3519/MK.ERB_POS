@@ -1,0 +1,296 @@
+<!--
+  Professional Landing Page for your setup.exe
+  - Theme: Green & White
+  - Single-file HTML (include images in /assets or replace URLs)
+  - Replace REPLACE_WITH_DIRECT_LINK with your actual direct-download URL (Drive/Dropbox/S3/etc.)
+
+  Hosting: push this file to a GitHub repo and enable GitHub Pages (Settings -> Pages -> branch: main, folder: /root)
+  Or upload to any static host (Netlify / Vercel / S3). If using Google Drive use the uc?export=download&id=FILE_ID pattern.
+
+  Notes:
+  - Put logo.png and screenshots inside an /assets folder or replace links to point to your images.
+  - If file is large, prefer Dropbox `?dl=1` or Google Drive direct download link.
+-->
+
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MK.ERB_POS — تحميل البرنامج</title>
+  <meta name="description" content="نظام نقاط بيع احترافي — تحميل مباشر" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- A simple style system (green & white) -->
+  <style>
+    :root{
+      --green:#1fb16a; /* primary green */
+      --green-dark:#139552;
+      --white:#ffffff;
+      --muted:#6b6f76;
+      --bg:#f7fbf8;
+      --card-shadow: 0 12px 30px rgba(11, 87, 41, 0.08);
+      --glass: rgba(255,255,255,0.6);
+      --radius: 14px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;font-family:'Cairo', Tahoma, Arial, sans-serif;background:linear-gradient(180deg,var(--bg),#ecf8f0);color:#0b2b1a;line-height:1.6;
+      -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;padding:0 18px;
+    }
+
+    /* Header */
+    .nav{max-width:1100px;margin:18px auto;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--green),var(--green-dark));display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:800;font-size:20px;box-shadow:var(--card-shadow)}
+    .brand h1{font-size:18px;margin:0}
+
+    /* Hero */
+    .hero{max-width:1100px;margin:18px auto 40px;display:grid;grid-template-columns:1fr 460px;gap:28px;align-items:center}
+    .hero-card{background:var(--white);border-radius:var(--radius);padding:36px;box-shadow:var(--card-shadow)}
+    .kicker{display:inline-block;padding:6px 12px;border-radius:999px;background:linear-gradient(90deg,var(--green),var(--green-dark));color:var(--white);font-weight:700;font-size:13px;margin-bottom:12px}
+    h2{margin:6px 0 14px;font-size:28px}
+    p.lead{color:var(--muted);margin:0 0 22px;font-size:16px}
+
+    .download-row{display:flex;gap:12px;align-items:center}
+    .btn-download{display:inline-flex;align-items:center;gap:10px;padding:14px 20px;border-radius:12px;background:linear-gradient(90deg,var(--green),var(--green-dark));color:var(--white);text-decoration:none;font-weight:700;box-shadow:0 8px 22px rgba(31,177,106,0.18);transition:transform .18s ease}
+    .btn-download:active{transform:scale(.98)}
+    .btn-secondary{background:transparent;border:2px solid rgba(19,149,82,0.12);padding:12px 16px;border-radius:12px;color:var(--green-dark);font-weight:700;text-decoration:none}
+
+    /* card right - preview */
+    .preview{background:linear-gradient(180deg, rgba(31,177,106,0.06), rgba(0,0,0,0));border-radius:16px;padding:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px}
+    .screen{width:100%;height:220px;border-radius:10px;background:linear-gradient(90deg,#ffffff, #f0fff5);display:flex;align-items:center;justify-content:center;border:1px solid rgba(20,80,40,0.04)}
+    .screen img{max-width:94%;max-height:88%;border-radius:8px;box-shadow:0 10px 28px rgba(14,48,31,0.06)}
+
+    /* features */
+    .features{max-width:1100px;margin:30px auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .feature{background:var(--white);padding:18px;border-radius:12px;box-shadow:var(--card-shadow);text-align:center}
+    .feature h3{margin:8px 0;font-size:16px}
+    .feature p{color:var(--muted);font-size:14px}
+
+    /* gallery */
+    .gallery{max-width:1100px;margin:28px auto;display:flex;gap:12px;align-items:center}
+    .thumb{flex:1;border-radius:12px;overflow:hidden;background:var(--white);padding:12px;box-shadow:var(--card-shadow)}
+    .thumb img{width:100%;height:180px;object-fit:cover;border-radius:8px}
+
+    /* footer */
+    footer{max-width:1100px;margin:40px auto 80px;text-align:center;color:var(--muted)}
+
+    /* responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .features{grid-template-columns:repeat(2,1fr)}
+      .gallery{flex-direction:column}
+    }
+    @media (max-width:520px){
+      .features{grid-template-columns:1fr}
+      .nav{padding:0 8px}
+      .logo{width:48px;height:48px}
+      h2{font-size:22px}
+    }
+
+    /* subtle animations */
+    .fade-up{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+    .show{opacity:1;transform:none}
+    .pulse{animation:pulse 2.6s ease-in-out infinite}
+    @keyframes pulse{0%{box-shadow:0 8px 24px rgba(31,177,106,0.14)}50%{box-shadow:0 18px 44px rgba(31,177,106,0.04)}100%{box-shadow:0 8px 24px rgba(31,177,106,0.14)}}
+
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="brand">
+       <div class="logo" style="background:none;box-shadow:none;padding:0">
+           <img src="assets/logo.png" alt="شعار MK.ERB_MK" style="width:56px;height:56px;border-radius:12px;object-fit:cover;">
+      </div>
+
+        <h1>MK.ERB_POS</h1>
+        <div style="font-size:12px;color:var(--muted)">نظام نقاط البيع — احترافي وسهل</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <a class="btn-secondary" href="#features">المميزات</a>
+      <a class="btn-secondary" href="#gallery">صور</a>
+      <a class="btn-secondary" href="#contact">تواصل</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-card fade-up" id="hero-left">
+        <div class="kicker">نسخة 1.0</div>
+        <h2>التحكم الكامل في متجرك — سريع، آمن، وسهل</h2>
+        <p class="lead">MK.ERB_POS هو نظام نقاط بيع مصمّم لإدارة الفواتير، المخزون، والعملاء بسهولة. تم تطويره محلياً ليتوافق مع متطلبات المطاعم و الكافيهات و السوبر ماركت.</p>
+
+        <div class="download-row">
+          <!-- REPLACE_HERE: ضع رابط التحميل المباشر مكان href أدناه -->
+          <a id="downloadBtn" class="btn-download" href="REPLACE_WITH_DIRECT_LINK">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 11l4 4 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>تحميل البرنامج</span>
+          </a>
+
+          <a class="btn-secondary" id="manualBtn" href="#features">عرض المميزات</a>
+        </div>
+
+        <div style="margin-top:14px;color:var(--muted);font-size:13px">الحجم : 22.6 MB • متوافق مع Windows 7/8/10/11</div>
+
+
+      </div>
+
+      <div class="preview fade-up" id="hero-right">
+        <div class="screen pulse">
+          <!-- ضع هنا صورة لواجهة البرنامج داخل assets/screen1.png أو غير الرابط -->
+        <img src="assets/screen1.png" alt="برنامج MK.ERB_MK — معاينة" onerror="this.style.background='linear-gradient(135deg,#d9f9e5,#ffffff)'; this.style.height='220px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.alt='MK.ERB_POS';">
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="features">
+      <div class="feature fade-up">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" style="margin:0 auto;display:block"><path d="M12 2v20" stroke="var(--green-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12h14" stroke="var(--green-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>تقارير فورية</h3>
+        <p>لوحات تحكم تعرض المبيعات، أرباح اليوم، والتقارير التفصيلية.</p>
+      </div>
+      <div class="feature fade-up">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" style="margin:0 auto;display:block"><rect x="3" y="3" width="18" height="18" rx="4" stroke="var(--green-dark)" stroke-width="2"/></svg>
+        <h3>إدارة المخزون</h3>
+        <p>تحديثات تلقائية للمخزون وتنبيهات انخفاض الكمية.</p>
+      </div>
+      <div class="feature fade-up">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" style="margin:0 auto;display:block"><path d="M12 2l2 7h7l-5.5 4 2 7L12 16 6.5 20l2-7L3 9h7z" stroke="var(--green-dark)" stroke-width="1.2"/></svg>
+        <h3>آمن وموثوق</h3>
+        <p>تصميم محلي خفيف وبنية آمنة لحماية بيانات متجرك.</p>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery" class="gallery">
+      <div class="thumb fade-up"><img src="assets/shot1.jpg" alt="لقطة 1" onerror="this.style.background='linear-gradient(135deg,#d9f9e5,#ffffff)'; this.style.height='180px'; this.alt='Screenshot 1';"></div>
+      <div class="thumb fade-up"><img src="assets/shot2.jpg" alt="لقطة 2" onerror="this.style.background='linear-gradient(135deg,#d9f9e5,#ffffff)'; this.style.height='180px'; this.alt='Screenshot 2';"></div>
+      <div class="thumb fade-up"><img src="assets/shot3.jpg" alt="لقطة 3" onerror="this.style.background='linear-gradient(135deg,#d9f9e5,#ffffff)'; this.style.height='180px'; this.alt='Screenshot 3';"></div>
+      <div class="thumb fade-up"><img src="assets/shot3.jpg" alt="لقطة 3" onerror="this.style.background='linear-gradient(135deg,#d9f9e5,#ffffff)'; this.style.height='180px'; this.alt='Screenshot 3';"></div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" style="max-width:1100px;margin:30px auto;padding:22px;background:var(--white);border-radius:12px;box-shadow:var(--card-shadow)">
+      <h3 style="margin-top:0">تواصل معنا</h3>
+      <p style="color:var(--muted)">لو عندك استفسار أو تريد نسخة مخصصة، ابعث لنا رسالة على البريد أو واتساب:</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn-secondary" href="mailto:magedkhater3519@outlook.com">✉️ e-mail</a>
+        <a class="btn-secondary" href="https://wa.me/201065939677">💬 Whatsapp</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div style="max-width:1100px;margin:0 auto;color:var(--muted);"> MK تم تطوير النظام بواسطة فريق<strong>MK.ERB_MK</strong> © <span id="year"></span></div>
+  </footer>
+
+  <script>
+    // small helper: add show class when element in viewport (simple AOS-lite)
+    function inView(el){
+      const rect = el.getBoundingClientRect();
+      return rect.top < (window.innerHeight || document.documentElement.clientHeight) - 60;
+    }
+    function reveal(){
+      document.querySelectorAll('.fade-up').forEach(el=>{ if(inView(el)) el.classList.add('show'); });
+    }
+    window.addEventListener('scroll', reveal); window.addEventListener('resize', reveal);
+    window.addEventListener('load', ()=>{ reveal(); document.getElementById('year').textContent = new Date().getFullYear(); });
+
+    // Auto-download logic
+    const downloadBtn = document.getElementById('downloadBtn');
+    const autodl = document.getElementById('autodl');
+    let autoStarted = false;
+
+    function startDownload(){
+      // if link is placeholder, do nothing
+      if(downloadBtn.href.includes('REPLACE_WITH_DIRECT_LINK')) return;
+      // create invisible link to force download
+      const a = document.createElement('a');
+      a.href = downloadBtn.href;
+      // don't set download attribute for cross-origin large files; let browser handle it
+      document.body.appendChild(a); a.style.display='none'; a.click(); a.remove();
+    }
+
+    // if user checks autodl, start countdown then download
+    autodl.addEventListener('change', ()=>{
+      if(autodl.checked && !autoStarted){
+        autoStarted = true; let t = 4; const origText = downloadBtn.querySelector('span').textContent;
+        const intv = setInterval(()=>{
+          downloadBtn.querySelector('span').textContent = 'يبدأ التحميل بعد ' + t + '...';
+          t--;
+          if(t<0){ clearInterval(intv); downloadBtn.querySelector('span').textContent = origText; startDownload(); }
+        },1000);
+      }
+    });
+
+    // Nice micro-interaction: pulse the preview
+    setInterval(()=>{ document.querySelectorAll('.pulse').forEach(el=>el.classList.toggle('pulse')) }, 4200);
+
+    // optional: track clicks (Google Analytics placeholder)
+    downloadBtn.addEventListener('click', ()=>{
+      // if you have analytics, call event here (GA4 or other)
+      console.log('download clicked');
+    });
+  </script>
+  <!-- ✅ Lightbox Popup -->
+<style>
+  .lightbox {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: none; align-items: center; justify-content: center;
+    z-index: 9999;
+  }
+  .lightbox img {
+    max-width: 90%; max-height: 90%;
+    border-radius: 10px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.4);
+    animation: zoomIn .25s ease;
+  }
+  .lightbox.show { display: flex; }
+  @keyframes zoomIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .lightbox-close {
+    position: absolute; top: 20px; right: 30px;
+    font-size: 30px; color: white; cursor: pointer;
+    user-select: none;
+  }
+</style>
+
+<div id="lightbox" class="lightbox">
+  <span class="lightbox-close">&times;</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  // Lightbox logic
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const closeBtn = document.querySelector(".lightbox-close");
+
+  document.querySelectorAll(".gallery img, .preview img").forEach(img => {
+    img.addEventListener("click", () => {
+      lightboxImg.src = img.src;
+      lightbox.classList.add("show");
+    });
+  });
+
+  closeBtn.addEventListener("click", () => lightbox.classList.remove("show"));
+  lightbox.addEventListener("click", e => {
+    if (e.target === lightbox) lightbox.classList.remove("show");
+  });
+</script>
+
+</body>
+</html>
