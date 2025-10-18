@@ -110,6 +110,78 @@
       h2{font-size:22px}
     }
 
+    /* هيدر متجاوب للهواتف */
+    @media (max-width: 520px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+      }
+      .nav .brand {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: 8px;
+        margin-top: 8px;
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .nav-toggle {
+        display: block;
+        background: var(--green);
+        color: var(--white);
+        border: none;
+        border-radius: 8px;
+        padding: 8px 14px;
+        font-size: 18px;
+        margin-top: 6px;
+        cursor: pointer;
+      }
+    }
+    @media (min-width: 521px) {
+      .nav-toggle { display: none; }
+      .nav-links { display: flex !important; flex-direction: row; gap: 12px; }
+    }
+
+      /* تحسين التوافق مع الهواتف الذكية */
+      @media (max-width: 768px) {
+        body { padding: 0 4px; }
+        .nav, .hero, .features, .gallery, footer, main, section {
+          max-width: 100vw !important;
+          margin-left: 0 !important;
+          margin-right: 0 !important;
+        }
+        .hero-card, .feature, .preview, .thumb {
+          padding: 16px !important;
+        }
+        .hero {
+          grid-template-columns: 1fr !important;
+          gap: 12px !important;
+        }
+        .screen img {
+          max-width: 100% !important;
+          max-height: 140px !important;
+        }
+        .gallery {
+          flex-direction: column !important;
+          gap: 8px !important;
+        }
+        .features {
+          grid-template-columns: 1fr !important;
+          gap: 8px !important;
+        }
+        h2 { font-size: 18px !important; }
+        .btn-download, .btn-secondary {
+          font-size: 15px !important;
+          padding: 10px 18px !important;
+        }
+      }
+
     /* subtle animations */
     .fade-up{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
     .show{opacity:1;transform:none}
@@ -122,15 +194,14 @@
 
   <nav class="nav">
     <div class="brand">
-       <div class="logo" style="background:none;box-shadow:none;padding:0">
-           <img src="assets/logo.png" alt="شعار MK.ERB_MK" style="width:56px;height:56px;border-radius:12px;object-fit:cover;">
+      <div class="logo" style="background:none;box-shadow:none;padding:0">
+        <img src="assets/logo.png" alt="شعار MK.ERB_MK" style="width:56px;height:56px;border-radius:12px;object-fit:cover;">
       </div>
-
-        <h1>MK.ERB_POS</h1>
-        <div style="font-size:12px;color:var(--muted)">نظام نقاط البيع — احترافي وسهل</div>
-      </div>
+      <h1>MK.ERB_POS</h1>
+      <div style="font-size:12px;color:var(--muted)">نظام نقاط البيع — احترافي وسهل</div>
     </div>
-    <div style="display:flex;gap:12px;align-items:center">
+    <button class="nav-toggle" onclick="toggleNavLinks()">القائمة</button>
+    <div class="nav-links">
       <a class="btn-secondary" href="#features">المميزات</a>
       <a class="btn-secondary" href="#gallery">صور</a>
       <a class="btn-secondary" href="#contact">تواصل</a>
@@ -202,7 +273,7 @@
       <div class="thumb fade-up"><img src="assets/shot1.jpg" alt="لقطة 1" onerror="this.style.background='linear-gradient(135deg,#d9f9e5,#ffffff)'; this.style.height='180px'; this.alt='Screenshot 1';"></div>
       <div class="thumb fade-up"><img src="assets/shot2.jpg" alt="لقطة 2" onerror="this.style.background='linear-gradient(135deg,#d9f9e5,#ffffff)'; this.style.height='180px'; this.alt='Screenshot 2';"></div>
       <div class="thumb fade-up"><img src="assets/shot3.jpg" alt="لقطة 3" onerror="this.style.background='linear-gradient(135deg,#d9f9e5,#ffffff)'; this.style.height='180px'; this.alt='Screenshot 3';"></div>
-     
+
     </section>
 
     <!-- Contact -->
@@ -232,6 +303,12 @@
     }
     window.addEventListener('scroll', reveal); window.addEventListener('resize', reveal);
     window.addEventListener('load', ()=>{ reveal(); document.getElementById('year').textContent = new Date().getFullYear(); });
+
+    // قائمة الهيدر للهواتف
+    function toggleNavLinks() {
+      var links = document.querySelector('.nav-links');
+      links.classList.toggle('show');
+    }
 
     // Auto-download logic
     const downloadBtn = document.getElementById('downloadBtn');
