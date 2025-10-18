@@ -128,7 +128,7 @@
 
         <div class="download-row">
           <!-- REPLACE_HERE: ضع رابط التحميل المباشر مكان href أدناه -->
-          <a id="downloadBtn" class="btn-download" href="blob:https://github.com/9445574e-1ad9-42b7-a93f-b499ddb0bff1">
+          <a id="downloadBtn" class="btn-download" href="https://github.com/mk3519/MK.ERB_POS/blob/main/POS_ERB_MK_Setup.exe">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 11l4 4 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             <span>تحميل البرنامج</span>
           </a>
@@ -212,7 +212,7 @@
 
     function startDownload(){
       // if link is placeholder, do nothing
-      if(downloadBtn.href.includes('REPLACE_WITH_DIRECT_LINK')) return;
+      if(downloadBtn.href.includes('https://github.com/mk3519/MK.ERB_POS/blob/main/POS_ERB_MK_Setup.exe')) return;
       // create invisible link to force download
       const a = document.createElement('a');
       a.href = downloadBtn.href;
