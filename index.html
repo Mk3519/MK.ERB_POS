@@ -1,19 +1,7 @@
-<!--
-  Professional Landing Page for your setup.exe
-  - Theme: Green & White
-  - Single-file HTML (include images in /assets or replace URLs)
-  - Replace REPLACE_WITH_DIRECT_LINK with your actual direct-download URL (Drive/Dropbox/S3/etc.)
 
-  Hosting: push this file to a GitHub repo and enable GitHub Pages (Settings -> Pages -> branch: main, folder: /root)
-  Or upload to any static host (Netlify / Vercel / S3). If using Google Drive use the uc?export=download&id=FILE_ID pattern.
-
-  Notes:
-  - Put logo.png and screenshots inside an /assets folder or replace links to point to your images.
-  - If file is large, prefer Dropbox `?dl=1` or Google Drive direct download link.
--->
 
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -108,6 +96,89 @@
       .nav{padding:0 8px}
       .logo{width:48px;height:48px}
       h2{font-size:22px}
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 10vh auto;
+      padding: 24px;
+      border-radius: var(--radius);
+      width: 90%;
+      max-width: 400px;
+      position: relative;
+      animation: modalSlideDown 0.3s ease;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+
+    @keyframes modalSlideDown {
+      from {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    .modal-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn-confirm {
+      background: var(--green);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    .btn-cancel {
+      background: #f1f1f1;
+      color: #333;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-family: 'Cairo', sans-serif;
     }
 
     /* هيدر متجاوب للهواتف */
@@ -216,10 +287,9 @@
         <p class="lead">MK.ERB_POS هو نظام نقاط بيع مصمّم لإدارة الفواتير، المخزون، والعملاء بسهولة. تم تطويره محلياً ليتوافق مع متطلبات المطاعم و الكافيهات و السوبر ماركت.</p>
 
       <div class="download-row" style="text-align:center;margin-top:40px;">
-        <a id="downloadBtn" 
+        <button id="downloadBtn" 
           class="btn-download" 
-          href="https://github.com/Mk3519/MK.ERB_POS/releases/download/v1.0.0/POS_ERB_MK_Setup.exe" 
-          download>
+          onclick="showModal()">
           
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" 
               xmlns="http://www.w3.org/2000/svg" 
@@ -230,12 +300,47 @@
           </svg>
           
           <span>تحميل البرنامج</span>
-        </a>
+        </button>
 
           <a class="btn-secondary" id="manualBtn" href="#features">عرض المميزات</a>
         </div>
 
-        <div style="margin-top:14px;color:var(--muted);font-size:13px">الحجم : 22.6 MB • متوافق مع Windows 7/8/10/11</div>
+        <!-- Download Form Modal -->
+        <div id="downloadModal" class="modal">
+          <div class="modal-content">
+            <h3 style="text-align: right">تفاصيل التحميل</h3>
+            <form id="downloadForm">
+              <div class="form-group">
+                <label for="name">الاسم</label>
+                <input type="text" id="name" name="name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">البريد الإلكتروني</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+              <div class="form-group">
+                <label for="phone">رقم الهاتف</label>
+                <input type="tel" id="phone" name="phone" required>
+              </div>
+              <div class="form-group">
+                <label for="businessType">نوع النشاط</label>
+                <select id="businessType" name="businessType" required>
+                  <option value="">اختر نوع النشاط</option>
+                  <option value="restaurant">مطعم</option>
+                  <option value="cafe">كافيه</option>
+                  <option value="supermarket">سوبر ماركت</option>
+                  <option value="other">أخرى</option>
+                </select>
+              </div>
+              <div class="modal-buttons">
+                <button type="button" class="btn-cancel" onclick="closeModal()">إلغاء</button>
+                <button type="submit" class="btn-confirm">تأكيد التحميل</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div style="margin-top:14px;color:var(--muted);font-size:13px">الحجم : 22.6 MB • متوافق مع Windows 10/11</div>
 
 
       </div>
@@ -310,30 +415,66 @@
       links.classList.toggle('show');
     }
 
-    // Auto-download logic
-    const downloadBtn = document.getElementById('downloadBtn');
-    const autodl = document.getElementById('autodl');
-    let autoStarted = false;
-
-    function startDownload(){
-      // if link is placeholder, do nothing
-      if(downloadBtn.href.includes('https://github.com/Mk3519/MK.ERB_POS/releases/download/v1.0.0/POS_ERB_MK_Setup.exe')) return;
-      // create invisible link to force download
-      const a = document.createElement('a');
-      a.href = downloadBtn.href;
-      // don't set download attribute for cross-origin large files; let browser handle it
-      document.body.appendChild(a); a.style.display='none'; a.click(); a.remove();
+    // Modal and download logic
+    const modal = document.getElementById('downloadModal');
+    const downloadForm = document.getElementById('downloadForm');
+    
+    // Replace this with your Google Apps Script Web App URL
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxCzNj_XjhK5lw1VXSQeLY1juLS3C4xTnd_rRHfMEdNyn6B0B7YvygfJUy7n_YPQ5vj/exec';
+    
+    function showModal() {
+      modal.style.display = "block";
     }
-
-    // if user checks autodl, start countdown then download
-    autodl.addEventListener('change', ()=>{
-      if(autodl.checked && !autoStarted){
-        autoStarted = true; let t = 4; const origText = downloadBtn.querySelector('span').textContent;
-        const intv = setInterval(()=>{
-          downloadBtn.querySelector('span').textContent = 'يبدأ التحميل بعد ' + t + '...';
-          t--;
-          if(t<0){ clearInterval(intv); downloadBtn.querySelector('span').textContent = origText; startDownload(); }
-        },1000);
+    
+    function closeModal() {
+      modal.style.display = "none";
+      downloadForm.reset();
+    }
+    
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        closeModal();
+      }
+    }
+    
+    // Handle form submission
+    downloadForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        businessType: document.getElementById('businessType').value,
+        downloadDate: new Date().toISOString()
+      };
+    
+      try {
+        // Send data to Google Sheet
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData)
+        });
+    
+        // Trigger the download
+        const downloadLink = document.createElement('a');
+        downloadLink.href = 'https://github.com/Mk3519/MK.ERB_POS/releases/download/v1.0.0/POS_ERB_MK_Setup.exe';
+        downloadLink.download = 'POS_ERB_MK_Setup.exe';
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+        
+        // Close the modal and show success message
+        closeModal();
+        alert('تم تحميل البرنامج بنجاح!');
+      } catch (error) {
+        console.error('Error:', error);
+        alert('حدث خطأ أثناء تحميل البرنامج. يرجى المحاولة مرة أخرى.');
       }
     });
 
