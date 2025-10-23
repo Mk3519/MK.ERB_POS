@@ -133,6 +133,90 @@
       }
     }
 
+    /* Toast Notifications Styles */
+    .toast-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+    }
+
+    .toast {
+      background: var(--white);
+      color: #333;
+      padding: 16px 24px;
+      border-radius: 12px;
+      margin-top: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: all 0.3s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .toast.success {
+      border-right: 4px solid var(--green);
+    }
+
+    .toast.error {
+      border-right: 4px solid #ff4444;
+    }
+
+    .toast-icon {
+      font-size: 20px;
+    }
+
+    .toast.success .toast-icon {
+      color: var(--green);
+    }
+
+    .toast.error .toast-icon {
+      color: #ff4444;
+    }
+
+    /* Loading Spinner Styles */
+    .loading-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid var(--white);
+      border-top: 4px solid var(--green);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    .loading-text {
+      color: var(--white);
+      margin-top: 15px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
     .form-group {
       margin-bottom: 15px;
     }
@@ -397,6 +481,17 @@
     <div style="max-width:1100px;margin:0 auto;color:var(--muted);"> MK تم تطوير النظام بواسطة فريق<strong>MK.ERB_MK</strong> © <span id="year"></span></div>
   </footer>
 
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div style="text-align: center">
+      <div class="loading-spinner"></div>
+      <div class="loading-text">جاري معالجة الطلب...</div>
+    </div>
+  </div>
+
   <script>
     // small helper: add show class when element in viewport (simple AOS-lite)
     function inView(el){
@@ -438,6 +533,43 @@
       }
     }
     
+    // Toast notification functions
+    function showToast(message, type = 'success') {
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      
+      const icon = type === 'success' ? '✓' : '✕';
+      toast.innerHTML = `
+        <span class="toast-icon">${icon}</span>
+        <span class="toast-message">${message}</span>
+      `;
+      
+      document.getElementById('toastContainer').appendChild(toast);
+      
+      // Trigger reflow
+      toast.offsetHeight;
+      
+      // Add show class for animation
+      toast.classList.add('show');
+      
+      // Remove toast after 3 seconds
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    // Loading functions
+    function showLoading(message = 'جاري معالجة الطلب...') {
+      const loadingOverlay = document.getElementById('loadingOverlay');
+      loadingOverlay.querySelector('.loading-text').textContent = message;
+      loadingOverlay.style.display = 'flex';
+    }
+
+    function hideLoading() {
+      document.getElementById('loadingOverlay').style.display = 'none';
+    }
+
     // Handle form submission
     downloadForm.addEventListener('submit', async function(e) {
       e.preventDefault();
@@ -451,6 +583,9 @@
       };
     
       try {
+        // Show loading
+        showLoading('جاري حفظ البيانات...');
+
         // Send data to Google Sheet
         await fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
@@ -460,6 +595,9 @@
           },
           body: JSON.stringify(formData)
         });
+
+        // Update loading message
+        showLoading('جاري تحضير التحميل...');
     
         // Trigger the download
         const downloadLink = document.createElement('a');
@@ -468,13 +606,16 @@
         document.body.appendChild(downloadLink);
         downloadLink.click();
         document.body.removeChild(downloadLink);
+
+        // Hide loading
+        hideLoading();
         
-        // Close the modal and show success message
+        // Close the modal and show success toast
         closeModal();
-        alert('تم تحميل البرنامج بنجاح!');
+        showToast('تم تحميل البرنامج بنجاح! شكراً لك', 'success');
       } catch (error) {
         console.error('Error:', error);
-        alert('حدث خطأ أثناء تحميل البرنامج. يرجى المحاولة مرة أخرى.');
+        showToast('حدث خطأ أثناء تحميل البرنامج. يرجى المحاولة مرة أخرى.', 'error');
       }
     });
 
