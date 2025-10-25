@@ -5,16 +5,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MK.ERB_POS — تحميل البرنامج</title>
+  <title>MK.ERB_POS — Download the program</title>
+  <link rel="icon" href="assets/logo.png">
   <meta name="description" content="نظام نقاط بيع احترافي — تحميل مباشر" />
 
-  <!-- Google Fonts -->
+
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- A simple style system (green & white) -->
+
   <style>
     :root{
-      --green:#1fb16a; /* primary green */
+      --green:#1fb16a;
       --green-dark:#139552;
       --white:#ffffff;
       --muted:#6b6f76;
@@ -30,13 +31,13 @@
       -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;padding:0 18px;
     }
 
-    /* Header */
+
     .nav{max-width:1100px;margin:18px auto;display:flex;align-items:center;justify-content:space-between}
     .brand{display:flex;align-items:center;gap:12px}
     .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--green),var(--green-dark));display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:800;font-size:20px;box-shadow:var(--card-shadow)}
     .brand h1{font-size:18px;margin:0}
 
-    /* Hero */
+
     .hero{max-width:1100px;margin:18px auto 40px;display:grid;grid-template-columns:1fr 460px;gap:28px;align-items:center}
     .hero-card{background:var(--white);border-radius:var(--radius);padding:36px;box-shadow:var(--card-shadow)}
     .kicker{display:inline-block;padding:6px 12px;border-radius:999px;background:linear-gradient(90deg,var(--green),var(--green-dark));color:var(--white);font-weight:700;font-size:13px;margin-bottom:12px}
@@ -66,26 +67,25 @@
     }
     .btn-secondary{background:transparent;border:2px solid rgba(19,149,82,0.12);padding:12px 16px;border-radius:12px;color:var(--green-dark);font-weight:700;text-decoration:none}
 
-    /* card right - preview */
+
     .preview{background:linear-gradient(180deg, rgba(31,177,106,0.06), rgba(0,0,0,0));border-radius:16px;padding:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px}
     .screen{width:100%;height:220px;border-radius:10px;background:linear-gradient(90deg,#ffffff, #f0fff5);display:flex;align-items:center;justify-content:center;border:1px solid rgba(20,80,40,0.04)}
     .screen img{max-width:94%;max-height:88%;border-radius:8px;box-shadow:0 10px 28px rgba(14,48,31,0.06)}
 
-    /* features */
     .features{max-width:1100px;margin:30px auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
     .feature{background:var(--white);padding:18px;border-radius:12px;box-shadow:var(--card-shadow);text-align:center}
     .feature h3{margin:8px 0;font-size:16px}
     .feature p{color:var(--muted);font-size:14px}
 
-    /* gallery */
+
     .gallery{max-width:1100px;margin:28px auto;display:flex;gap:12px;align-items:center}
     .thumb{flex:1;border-radius:12px;overflow:hidden;background:var(--white);padding:12px;box-shadow:var(--card-shadow)}
     .thumb img{width:100%;height:180px;object-fit:cover;border-radius:8px}
 
-    /* footer */
+
     footer{max-width:1100px;margin:40px auto 80px;text-align:center;color:var(--muted)}
 
-    /* responsive */
+
     @media (max-width:980px){
       .hero{grid-template-columns:1fr;}
       .features{grid-template-columns:repeat(2,1fr)}
@@ -98,7 +98,7 @@
       h2{font-size:22px}
     }
 
-    /* Modal Styles */
+
     .modal {
       display: none;
       position: fixed;
@@ -182,7 +182,7 @@
       color: #ff4444;
     }
 
-    /* Loading Spinner Styles */
+
     .loading-overlay {
       display: none;
       position: fixed;
@@ -265,7 +265,7 @@
       font-family: 'Cairo', sans-serif;
     }
 
-    /* هيدر متجاوب للهواتف */
+
     @media (max-width: 520px) {
       .nav {
         flex-direction: column;
@@ -303,7 +303,7 @@
       .nav-links { display: flex !important; flex-direction: row; gap: 12px; }
     }
 
-      /* تحسين التوافق مع الهواتف الذكية */
+
       @media (max-width: 768px) {
         body { padding: 0 4px; }
         .nav, .hero, .features, .gallery, footer, main, section {
@@ -337,7 +337,7 @@
         }
       }
 
-    /* subtle animations */
+
     .fade-up{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
     .show{opacity:1;transform:none}
     .pulse{animation:pulse 2.6s ease-in-out infinite}
@@ -353,22 +353,22 @@
         <img src="assets/logo.png" alt="شعار MK.ERB_MK" style="width:56px;height:56px;border-radius:12px;object-fit:cover;">
       </div>
       <h1>MK.ERB_POS</h1>
-      <div style="font-size:12px;color:var(--muted)">نظام نقاط البيع — احترافي وسهل</div>
+      <div style="font-size:12px;color:var(--muted)">POS system — professional and easy</div>
     </div>
-    <button class="nav-toggle" onclick="toggleNavLinks()">القائمة</button>
+    <button class="nav-toggle" onclick="toggleNavLinks()">List</button>
     <div class="nav-links">
-      <a class="btn-secondary" href="#features">المميزات</a>
-      <a class="btn-secondary" href="#gallery">صور</a>
-      <a class="btn-secondary" href="#contact">تواصل</a>
+      <a class="btn-secondary" href="#features">Features</a>
+      <a class="btn-secondary" href="#gallery">photo</a>
+      <a class="btn-secondary" href="#contact">communication</a>
     </div>
   </nav>
 
   <main>
     <section class="hero">
       <div class="hero-card fade-up" id="hero-left">
-        <div class="kicker">نسخة 1.0</div>
-        <h2>التحكم الكامل في متجرك — سريع، آمن، وسهل</h2>
-        <p class="lead">MK.ERB_POS هو نظام نقاط بيع مصمّم لإدارة الفواتير، المخزون، والعملاء بسهولة. تم تطويره محلياً ليتوافق مع متطلبات المطاعم و الكافيهات و السوبر ماركت.</p>
+        <div class="kicker">Version 1.0</div>
+        <h2>Complete control of your store — fast, secure, and easy</h2>
+        <p class="lead">MK.ERB_POS is a point of sale system designed to easily manage invoices, inventory, and customers. It was developed locally to meet the requirements of restaurants, cafes and supermarkets.</p>
 
       <div class="download-row" style="text-align:center;margin-top:40px;">
         <button id="downloadBtn" 
@@ -383,56 +383,56 @@
             <path d="M5 19h14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           
-          <span>تحميل البرنامج</span>
+          <span>Download the program</span>
         </button>
 
-          <a class="btn-secondary" id="manualBtn" href="#features">عرض المميزات</a>
+          <a class="btn-secondary" id="manualBtn" href="#features">Show features</a>
         </div>
 
         <!-- Download Form Modal -->
         <div id="downloadModal" class="modal">
           <div class="modal-content">
-            <h3 style="text-align: right">تفاصيل التحميل</h3>
+            <h3 style="text-align: right">Download details</h3>
             <form id="downloadForm">
               <div class="form-group">
-                <label for="name">الاسم</label>
+                <label for="name">Name</label>
                 <input type="text" id="name" name="name" required>
               </div>
               <div class="form-group">
-                <label for="email">البريد الإلكتروني</label>
+                <label for="email">E-mail</label>
                 <input type="email" id="email" name="email" required>
               </div>
               <div class="form-group">
-                <label for="phone">رقم الهاتف</label>
+                <label for="phone">Phone</label>
                 <input type="tel" id="phone" name="phone" required>
               </div>
               <div class="form-group">
-                <label for="businessType">نوع النشاط</label>
+                <label for="businessType">Type of activity</label>
                 <select id="businessType" name="businessType" required>
-                  <option value="">اختر نوع النشاط</option>
-                  <option value="restaurant">مطعم</option>
-                  <option value="cafe">كافيه</option>
-                  <option value="supermarket">سوبر ماركت</option>
-                  <option value="other">أخرى</option>
+                  <option value="">Choose the activity type</option>
+                  <option value="restaurant">restaurant</option>
+                  <option value="cafe">Cafe</option>
+                  <option value="supermarket">supermarket</option>
+                  <option value="other">Other</option>
                 </select>
               </div>
               <div class="modal-buttons">
-                <button type="button" class="btn-cancel" onclick="closeModal()">إلغاء</button>
-                <button type="submit" class="btn-confirm">تأكيد التحميل</button>
+                <button type="button" class="btn-cancel" onclick="closeModal()">cancellation</button>
+                <button type="submit" class="btn-confirm">Confirm download</button>
               </div>
             </form>
           </div>
         </div>
 
-        <div style="margin-top:14px;color:var(--muted);font-size:13px">الحجم : 22.6 MB • متوافق مع Windows 10/11</div>
+        <div style="margin-top:14px;color:var(--muted);font-size:13px">Size: 22.6 MB • Compatible with Windows 10/11</div>
 
 
       </div>
 
       <div class="preview fade-up" id="hero-right">
         <div class="screen pulse">
-          <!-- ضع هنا صورة لواجهة البرنامج داخل assets/screen1.png أو غير الرابط -->
-        <img src="assets/screen1.png" alt="برنامج MK.ERB_MK — معاينة" onerror="this.style.background='linear-gradient(135deg,#d9f9e5,#ffffff)'; this.style.height='220px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.alt='MK.ERB_POS';">
+          
+        <img src="assets/screen1.png" alt="برنامج MK.ERB_MK — Preview" onerror="this.style.background='linear-gradient(135deg,#d9f9e5,#ffffff)'; this.style.height='220px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.alt='MK.ERB_POS';">
         </div>
         
       </div>
@@ -442,18 +442,18 @@
     <section id="features" class="features">
       <div class="feature fade-up">
         <svg width="44" height="44" viewBox="0 0 24 24" fill="none" style="margin:0 auto;display:block"><path d="M12 2v20" stroke="var(--green-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12h14" stroke="var(--green-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h3>تقارير فورية</h3>
-        <p>لوحات تحكم تعرض المبيعات، أرباح اليوم، والتقارير التفصيلية.</p>
+        <h3>Instant reports</h3>
+        <p>Dashboards display sales, today's profits, and detailed reports.</p>
       </div>
       <div class="feature fade-up">
         <svg width="44" height="44" viewBox="0 0 24 24" fill="none" style="margin:0 auto;display:block"><rect x="3" y="3" width="18" height="18" rx="4" stroke="var(--green-dark)" stroke-width="2"/></svg>
-        <h3>إدارة المخزون</h3>
-        <p>تحديثات تلقائية للمخزون وتنبيهات انخفاض الكمية.</p>
+        <h3>Inventory management</h3>
+        <p>Automatic stock updates and low quantity alerts.</p>
       </div>
       <div class="feature fade-up">
         <svg width="44" height="44" viewBox="0 0 24 24" fill="none" style="margin:0 auto;display:block"><path d="M12 2l2 7h7l-5.5 4 2 7L12 16 6.5 20l2-7L3 9h7z" stroke="var(--green-dark)" stroke-width="1.2"/></svg>
-        <h3>آمن وموثوق</h3>
-        <p>تصميم محلي خفيف وبنية آمنة لحماية بيانات متجرك.</p>
+        <h3>Safe and reliable</h3>
+        <p>Lightweight, native design and secure architecture to protect your store's data.</p>
       </div>
     </section>
 
@@ -467,8 +467,8 @@
 
     <!-- Contact -->
     <section id="contact" style="max-width:1100px;margin:30px auto;padding:22px;background:var(--white);border-radius:12px;box-shadow:var(--card-shadow)">
-      <h3 style="margin-top:0">تواصل معنا</h3>
-      <p style="color:var(--muted)">لو عندك استفسار أو تريد نسخة مخصصة، ابعث لنا رسالة على البريد أو واتساب:</p>
+      <h3 style="margin-top:0">Contact us</h3>
+      <p style="color:var(--muted)">If you have any questions or want a customized copy, send us a message via email or WhatsApp:</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
         <a class="btn-secondary" href="mailto:magedkhater3519@outlook.com">✉️ e-mail</a>
         <a class="btn-secondary" href="https://wa.me/201065939677">💬 Whatsapp</a>
@@ -478,7 +478,7 @@
   </main>
 
   <footer>
-    <div style="max-width:1100px;margin:0 auto;color:var(--muted);"> MK تم تطوير النظام بواسطة فريق<strong>MK.ERB_MK</strong> © <span id="year"></span></div>
+    <div style="max-width:1100px;margin:0 auto;color:var(--muted);"> MK The system is developed by a team<strong>MK.ERB_MK</strong> © <span id="year"></span></div>
   </footer>
 
   <!-- Toast Container -->
@@ -488,12 +488,12 @@
   <div class="loading-overlay" id="loadingOverlay">
     <div style="text-align: center">
       <div class="loading-spinner"></div>
-      <div class="loading-text">جاري معالجة الطلب...</div>
+      <div class="loading-text">Loading is being processed...</div>
     </div>
   </div>
 
   <script>
-    // small helper: add show class when element in viewport (simple AOS-lite)
+
     function inView(el){
       const rect = el.getBoundingClientRect();
       return rect.top < (window.innerHeight || document.documentElement.clientHeight) - 60;
@@ -504,7 +504,7 @@
     window.addEventListener('scroll', reveal); window.addEventListener('resize', reveal);
     window.addEventListener('load', ()=>{ reveal(); document.getElementById('year').textContent = new Date().getFullYear(); });
 
-    // قائمة الهيدر للهواتف
+    
     function toggleNavLinks() {
       var links = document.querySelector('.nav-links');
       links.classList.toggle('show');
@@ -560,7 +560,7 @@
     }
 
     // Loading functions
-    function showLoading(message = 'جاري معالجة الطلب...') {
+    function showLoading(message = 'جاري بدء التحميل...') {
       const loadingOverlay = document.getElementById('loadingOverlay');
       loadingOverlay.querySelector('.loading-text').textContent = message;
       loadingOverlay.style.display = 'flex';
@@ -584,7 +584,7 @@
     
       try {
         // Show loading
-        showLoading('جاري حفظ البيانات...');
+        showLoading('The file is being prepared...');
 
         // Send data to Google Sheet
         await fetch(GOOGLE_SCRIPT_URL, {
@@ -597,7 +597,7 @@
         });
 
         // Update loading message
-        showLoading('جاري تحضير التحميل...');
+        showLoading('Preparing to downloadprepared...');
     
         // Trigger the download
         const downloadLink = document.createElement('a');
@@ -612,10 +612,10 @@
         
         // Close the modal and show success toast
         closeModal();
-        showToast('تم تحميل البرنامج بنجاح! شكراً لك', 'success');
+        showToast('The program has been downloaded successfully! Thank you', 'success');
       } catch (error) {
         console.error('Error:', error);
-        showToast('حدث خطأ أثناء تحميل البرنامج. يرجى المحاولة مرة أخرى.', 'error');
+        showToast('An error occurred while loading the program. Please try again.', 'error');
       }
     });
 
@@ -628,7 +628,7 @@
       console.log('download clicked');
     });
   </script>
-  <!-- ✅ Lightbox Popup -->
+
 <style>
   .lightbox {
     position: fixed;
